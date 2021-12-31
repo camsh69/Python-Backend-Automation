@@ -1,8 +1,14 @@
 import requests
-from payLoad import *
+from payLoad import addBookPayload
+from utilities.configurations import getConfig
+from utilities.resources import ApiResources
 
-addBook_response = requests.post('http://216.10.245.166/Library/Addbook.php',
-                                 json=addBookPayload("bcd989"), headers={"Content_Type": "application/json"},)
+add_url = getConfig()['API']['endpoint'] + ApiResources.addBook
+delete_url = getConfig()['API']['endpoint'] + ApiResources.deleteBook
+headers = {"Content_Type": "application/json"}
+
+addBook_response = requests.post(
+    add_url, json=addBookPayload("bcd987"), headers=headers,)
 
 print(addBook_response.status_code)
 assert addBook_response.status_code == 200
@@ -12,9 +18,11 @@ response_addBook = addBook_response.json()
 assert "successfully added" in response_addBook["Msg"]
 
 bookID = response_addBook['ID']
-response_deleteBook = requests.post('http://216.10.245.166/Library/DeleteBook.php', json={
+
+response_deleteBook = requests.post(delete_url, json={
     "ID": bookID
-}, headers={"Content_Type": "application/json"},)
+}, headers=headers,)
+
 print(response_deleteBook.status_code)
 assert response_deleteBook.status_code == 200
 

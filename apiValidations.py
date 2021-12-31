@@ -1,8 +1,12 @@
 import requests
 import json
+from utilities.configurations import getConfig
+from utilities.resources import ApiResources
 
-response = requests.get("http://216.10.245.166/Library/GetBook.php",
-                        params={"AuthorName": "Rahul Shetty2"})
+get_url = getConfig()['API']['endpoint'] + ApiResources.getBook
+params = ApiResources.params
+
+response = requests.get(get_url, params=params)
 
 # *** using .text to return JSON string
 # print(response.text)
