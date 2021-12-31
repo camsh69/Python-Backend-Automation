@@ -29,3 +29,12 @@ assert response_deleteBook.status_code == 200
 res_json = response_deleteBook.json()
 print(res_json)
 assert 'successfully deleted' in res_json['msg']
+
+
+# *** Authentication
+url = "https://github.com/camsh69"
+
+gh_respose = requests.get(url, auth=(
+    'user_name_goes_here', 'password_goes_here'))
+
+print(f"GitHub response is {gh_respose.status_code}")
