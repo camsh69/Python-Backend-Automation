@@ -2,7 +2,7 @@ import json
 
 courses = '{"name": "RahulShetty", "languages": ["Java", "Python"]}'
 
-# Loads method parses json string and returns dictionary
+# *** .loads() method parses JSON string and returns dictionary
 dict_courses = json.loads(courses)
 print(type(dict_courses))
 print(dict_courses)
@@ -13,7 +13,7 @@ print(dict_courses['name'])
 # print(list_languages[0])
 print(dict_courses['languages'][0])
 
-# *** Parse content present in JSON file (load method)
+# *** .load() method parses JSON string from remote file
 with open('Documents\\course1.json') as f:
     data = json.load(f)
     print(data)
