@@ -1,3 +1,6 @@
+from utilities.configurations import *
+
+
 def addBookPayload(isbn):
 
     body = {
@@ -7,3 +10,13 @@ def addBookPayload(isbn):
         "author": "John foe"
     }
     return body
+
+
+def buildPayLoadFromDB(query):
+    addBody = {}
+    tp = getQuery(query)
+    addBody['name'] = tp[0]
+    addBody['isbn'] = tp[1]
+    addBody['aisle'] = tp[2]
+    addBody['author'] = tp[3]
+    return addBody

@@ -1,14 +1,15 @@
 import requests
-from payLoad import addBookPayload
+from payLoad import addBookPayload, buildPayLoadFromDB
 from utilities.configurations import getConfig
 from utilities.resources import ApiResources
 
 add_url = getConfig()['API']['endpoint'] + ApiResources.addBook
 delete_url = getConfig()['API']['endpoint'] + ApiResources.deleteBook
 headers = {"Content_Type": "application/json"}
+query = "SELECT * FROM Books"
 
 addBook_response = requests.post(
-    add_url, json=addBookPayload("bcd987"), headers=headers,)
+    add_url, json=buildPayLoadFromDB(query), headers=headers,)
 
 print(addBook_response.status_code)
 assert addBook_response.status_code == 200
@@ -29,6 +30,3 @@ assert response_deleteBook.status_code == 200
 res_json = response_deleteBook.json()
 print(res_json)
 assert 'successfully deleted' in res_json['msg']
-
-
-
